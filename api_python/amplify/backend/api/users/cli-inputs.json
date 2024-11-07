@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/manageUser": {
+      "name": "/manageUser",
+      "lambdaFunction": "manageUser",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/insertEmail": {
+      "name": "/insertEmail",
+      "lambdaFunction": "insertEmail",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

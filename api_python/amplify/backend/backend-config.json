@@ -1,0 +1,100 @@
+{
+  "api": {
+    "users": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "manageUser"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "insertEmail"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "insertEmail": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "users"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "manageUser": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "users"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_insertEmail_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "insertEmail"
+        }
+      ]
+    },
+    "AMPLIFY_function_insertEmail_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "insertEmail"
+        }
+      ]
+    },
+    "AMPLIFY_function_manageUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "manageUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_manageUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "manageUser"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "users": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    }
+  }
+}
